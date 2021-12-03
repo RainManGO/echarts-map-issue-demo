@@ -1,12 +1,12 @@
 /*
  * @Author: yar
  * @Date: 2021-12-01 09:17:03
- * @LastEditTime: 2021-12-02 15:38:57
+ * @LastEditTime: 2021-12-03 09:27:52
  * @LastEditors: ZY
  * @Description:
  * @FilePath: /echarts-map/src/pages/map-chart/index.tsx
  */
-
+// @ts-nocheck
 import React, { useMemo, Fragment } from "react";
 import ReactEcharts from "echarts-for-react";
 import type { EChartOption } from "echarts";
@@ -43,12 +43,12 @@ const MapChart: React.FC<{
   const geoCoordMap = ["总部", "大庆", "沈阳", "吉林", "西安", "西安市"];
   const moveLinesSR: any[] = [];
   const moveLinesZC: any[] = [];
-  const itemObj = {};
+  let itemObj = {};
   if (allData && allData.moveLines) {
     const { moveLines } = allData;
     console.log("moveLines", moveLines);
-    for (let i = 0; i < moveLines.length; i++) {
-      const dataItem = moveLines[i];
+    for (var i = 0; i < moveLines.length; i++) {
+      let dataItem = moveLines[i];
       if (geoCoordMap.indexOf(dataItem.fromName) > -1) {
         moveLinesZC.push(dataItem);
       } else {
@@ -109,7 +109,6 @@ const MapChart: React.FC<{
           type: "effectScatter",
           coordinateSystem: "geo",
           zlevel: 5,
-          symbolSize: 2,
           rippleEffect: {
             // 涟漪特效
             brushType: "stroke", // 波纹绘制方式 stroke，fill
@@ -123,16 +122,16 @@ const MapChart: React.FC<{
               return param.data.name;
             },
             color: "#FFBD3B", //46bee9
-            fontSize: 3,
+            fontSize: 16,
             position: "right",
-            distance: 3,
+            distance: 20,
             emphasis: {
               show: true,
               position: "left",
               formatter: "{b}",
             },
           },
-          symbolSize: 2,
+          symbolSize: 6,
           showEffectOn: "render",
           itemStyle: {
             color: "#ffbb3b", //46bee9
@@ -148,9 +147,9 @@ const MapChart: React.FC<{
           effect: {
             show: true,
             period: 1, //箭头指向速度，值越小速度越快
-            constantSpeed: 5,
+            constantSpeed: 6,
             symbol: "diamond", // 箭头图标，pin 圆点
-            symbolSize: 1, // 图标大小
+            symbolSize: 4, // 图标大小
             trailLength: 0.8, // 特效尾迹长度[0,1]值越大，尾迹越长重
             color: "rgba(26,217,255,0.8)",
           },
@@ -173,9 +172,9 @@ const MapChart: React.FC<{
           effect: {
             show: true,
             period: 1, //箭头指向速度，值越小速度越快
-            constantSpeed: 5,
+            constantSpeed: 6,
             symbol: "diamond", // 箭头图标，pin 圆点
-            symbolSize: 1, // 图标大小
+            symbolSize: 3, // 图标大小
             trailLength: 0.7, // 特效尾迹长度[0,1]值越大，尾迹越长重
             color: "rgba(211, 89, 24, 0.7)",
           },
